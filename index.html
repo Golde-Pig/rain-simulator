@@ -261,9 +261,38 @@
             particles.forEach(p => p.hit = false); // 重置雨滴状态
         }
 
-        // 绘制人物
-        ctx.fillStyle = '#7f8c8d';
-        ctx.fillRect(personX, pY, pWidth, pHeight);
+        // 绘制生动人物造型
+        const cx = personX + pWidth / 2;
+        
+        // 头部
+        ctx.fillStyle = '#fcd5ce';
+        ctx.beginPath();
+        ctx.arc(cx, pY + 7, 7, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // 头发
+        ctx.fillStyle = '#4a4a4a';
+        ctx.beginPath();
+        ctx.arc(cx, pY + 5, 7, Math.PI, Math.PI * 2);
+        ctx.fill();
+        
+        // 上衣
+        ctx.fillStyle = '#3498db';
+        ctx.fillRect(personX + 2, pY + 14, pWidth - 4, 18);
+        
+        // 手臂摆动动画
+        const armSwing = Math.sin(personX * 0.15) * 3;
+        ctx.fillRect(personX - 3, pY + 16 + armSwing, 4, 14);
+        ctx.fillRect(personX + pWidth - 1, pY + 16 - armSwing, 4, 14);
+        
+        // 裤子
+        ctx.fillStyle = '#2c3e50';
+        ctx.fillRect(personX + 4, pY + 32, pWidth - 8, 10);
+        
+        // 走路腿部动画
+        const walkPhase = Math.sin(personX * 0.2);
+        ctx.fillRect(personX + 4, pY + 42, 5, 8 + walkPhase * 3);
+        ctx.fillRect(personX + pWidth - 9, pY + 42, 5, 8 - walkPhase * 3);
 
         // 绘制地面
         ctx.fillStyle = '#95a5a6';
